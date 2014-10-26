@@ -4,7 +4,7 @@ angular.module('columns', [])
 			['Gun', 'name', false, true],
 			['Type', 'gunType', false, true],
 			['Attack', 'attack', false, true],
-			['Clip Size', 'clipSize', 0, false],
+			['Mag Size', 'clipSize', 0, false],
 			['Damage/Bullet', 'damage', 0, true],
 			['Accuracy (%)', 'accuracy', 0, false],
 			['Headshot %', 'headshotPercent', 0, false],
