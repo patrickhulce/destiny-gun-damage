@@ -1,4 +1,4 @@
-var app = angular.module('destiny-gun-data',['ngRoute', 'compare','list', 'info'])
+var app = angular.module('destiny-gun-data',['ngRoute', 'compare','list', 'info', 'angulartics', 'angulartics.google.analytics'])
 	.config(function($routeProvider) {
 		$routeProvider.
 			when('/info', {

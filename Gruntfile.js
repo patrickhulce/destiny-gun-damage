@@ -12,6 +12,8 @@ bowerSrcPaths.copy.push({src: 'bower_components/pkgname/assets/**', dest: 'asset
 */
 bowerSrcPaths.js.push('bower_components/d3/d3.min.js');
 bowerSrcPaths.js.push('bower_components/angular-charts/dist/angular-charts.min.js');
+bowerSrcPaths.js.push('bower_components/angulartics/dist/angulartics.min.js');
+bowerSrcPaths.js.push('bower_components/angulartics/dist/angulartics-ga.min.js');
 
 module.exports = function (grunt) {
   var staticFolder = 'www-root';
