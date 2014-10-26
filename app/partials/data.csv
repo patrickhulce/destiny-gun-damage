@@ -1,0 +1,3 @@
+String of Curses,Instant reloading and 15% increased damage after a kill.
+Suros Regime,Bottom half of the magazine does additional damage starting at a 1% increase to 75% for the final round. The increase follows an exponential curve, so damage will be overstated for all but the final rounds.
+Final Round,Increased damage for the final round in the magazine. Treated as if it were spread across the clip.

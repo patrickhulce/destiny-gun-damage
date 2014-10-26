@@ -1,0 +1,16 @@
+<h4>Column Displays</h4>
+<ul class="nav nav-pills">
+	<li ng-repeat="column in columns | filter:isVisible()">
+		<a style="cursor: pointer; margin-bottom: 5px; margin-right: 5px" ng-click="removeColumn(column)">
+			 <span class="badge pull-right"><i class="fa fa-remove"></i></span>
+			{{ column.name }}
+		</a>
+	</li>
+	<li>
+		<input class="form-control" type="text"
+			placeholder="Add a column..."
+			typeahead="column as column.name for column in columnOptions | filter:{name:$viewValue}"
+			typeahead-on-select="addColumn($item)"
+			ng-model="columnText">
+	</li>
+</ul>

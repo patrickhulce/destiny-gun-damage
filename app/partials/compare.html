@@ -1,0 +1,153 @@
+<div class="row">
+  <div class="col-sm-6">
+    <div class="well bs-component">
+      <form class="form-horizontal">
+        <fieldset>
+          <legend>Gun Comparison Options</legend>
+          <div class="form-group">
+            <label for="targetSelect" class="col-md-3 control-label">Target</label>
+            <div class="col-md-9">
+              <select class="form-control" id="targetSelect" ng-model="targetEnemy">
+                <option value="0">Normal</option>
+                <option value="1">Major</option>
+                <option value="2">Ultra</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 control-label">Accuracy</label>
+            <div class="col-md-3">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="accuracy"></input>
+                <span class="input-group-addon">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Headshots</label>
+            <div class="col-md-3">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="headshots"></input>
+                <span class="input-group-addon">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-offset-3">
+            <button class="btn btn-warning"
+                ng-click="resetGuns()">
+                Set All Guns to This
+            </button>
+          </div>
+        </fieldset>
+
+
+  <column-picker columns="columns" enabled-columns="['name','attack','damage','dps','adjustedDps']"></column-picker>
+
+        <fieldset style="margin-top: 20px" ng-show="!!selectedGun">
+          <legend>Gun Specific Options</legend>
+
+
+          <div class="form-group">
+            <label class="col-md-3 control-label">Gun</label>
+            <div class="col-md-9" style="padding-top: 6px;">
+              <strong style="color: #3c3; font-size: 120%;">
+                {{ selectedGun.name }}
+              </strong>
+
+            <button class="btn btn-danger btn-xs"
+                ng-click="removeGun(selectedGunIndex)">
+                Remove
+            </button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Attack</label>
+            <div class="col-md-3">
+              <input class="form-control" type="text"
+                  ng-model="selectedGun.attack">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Clip Size</label>
+            <div class="col-md-3">
+              <select class="form-control"
+                  ng-model="selectedGun.clipSize"
+                  ng-options="sz for sz in selectedGun.clipSizes">
+                <option>19</option>
+                <option>27</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Accuracy</label>
+            <div class="col-md-3">
+              <div class="input-group">
+                <input class="form-control" type="text" 
+                    ng-model="selectedGun.accuracy"></input>
+                <span class="input-group-addon">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Headshots</label>
+            <div class="col-md-3">
+              <div class="input-group">
+                <input class="form-control" type="text"
+                    ng-model="selectedGun.headshotPercent"></input>
+                <span class="input-group-addon">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Buffs</label>
+            <div class="col-md-9">
+
+              <select multiple class="form-control"
+                  ng-model="selectedGun.buffs"
+                  ng-options="opt.name as opt.name for opt in buffs">
+              </select>
+              <div class="col-md-12" ng-repeat="buff in selectedGun.buffs">
+                <h4>{{ buff.name }}</h4>
+                {{ buff.description }}
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="col-sm-6">
+    <div ac-chart="chartType" ac-data="chartData" ac-config="chartConfig" id='chart' class='chart'></div>
+
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th ng-repeat="column in columns | filter:{enabled: true}">
+            {{ column.name }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="gun in selectedGuns" 
+            ng-class="{info: $index == selectedGunIndex}"
+            ng-click="selectGun($index)"
+            style="cursor: pointer;">
+          <td ng-repeat="column in columns | filter:{enabled: true}">{{ valueFor(gun,column) }}</td>
+        </tr>
+        <tr>
+          <td colspan="{{columns.length}}">
+              <input type="text" class="form-control" placeholder="Search for a gun..." typeahead="gun as gun.name for gun in guns | filter:{name:$viewValue}" ng-model="addGunText" typeahead-on-select="addGun($item)">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
+</div>
+
+			

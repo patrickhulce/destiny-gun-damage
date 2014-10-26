@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-md-8">
+    <h3>Charts of Selected Guns: <span ng-if="useAdjusted">Adjusted </span>DPS</h3>
+  </div>
+  <div class="col-md-4">
+    <button style="float: right; margin-top: 20px;"
+        class="btn btn-xs btn-warning" 
+        ng-click="flipAdjusted()">
+      Switch to <span ng-if="!useAdjusted">Adjusted </span>DPS
+    </button>
+  </div>
+  <div class="col-md-12">
+    <p>
+      Graphs the DPS/Adjusted DPS of the selected guns below as a function of the percent of shots you hit that are headshots. Switch between the two using the button above.
+    </p>
+  </div>
+  <div class="col-md-4" ng-repeat="i in [0,1,2]">
+    <div ac-chart="chartType" ac-data="chartData[i]" ac-config="chartConfigs[i]" id='chart' class='chart'></div>
+  </div>
+</div>
+
+<div class="row">
+  <h3>Table Options</h3>
+  <form class="form-inline" role="form">
+    <div class="form-group col-xs-4">
+      <label>Accuracy </label>
+      <div class="input-group col-xs-3">
+        <input class="form-control" type="text" ng-model="accuracy"></input>
+        <span class="input-group-addon">%</span>
+      </div>
+    </div>
+    <div class="form-group col-xs-4">
+      <label>Headshots </label>
+      <div class="input-group col-xs-3">
+        <input class="form-control" type="text" ng-model="headshotPercent"></input>
+        <span class="input-group-addon">%</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Enemy Type </label>
+      <select class="form-control" id="targetSelect" ng-model="targetEnemy">
+        <option value="0">Normal</option>
+        <option value="1">Major</option>
+        <option value="2">Ultra</option>
+      </select>
+    </div>
+  </form>
+
+  <column-picker columns="columns" enabled-columns="['name','damage','clipSize','rof','dps','adjustedDps']"></column-picker>
+</div>
+
+<div class="row">
+  <h3>Gun Data</h3>
+  <table class="table table-striped table-hover ">
+    <thead>
+      <tr>
+        <th></th>
+        <th ng-repeat="column in columns | filter:{enabled: true}">
+  	      <a class="sort-column" ng-click="setSort($index)"> 
+  		    {{ column.name }} 
+  	      	<i ng-class="{'fa-sort': $index != sortColumn, 'fa-sort-asc': $index == sortColumn && !sortIsDescending, 'fa-sort-desc': $index == sortColumn && sortIsDescending}" class="fa"></i>
+  	      </a>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="gun in guns | orderBy:sortPredicate:sortIsDescending"
+          ng-class="{success: gun.included, danger: !gun.included}"
+          ng-click="includeGun(gun)"
+          style="cursor: pointer;">
+        <td><i class="fa" ng-class="{'fa-circle': gun.included, 'fa-circle-o': !gun.included}"></i></td>
+        <td ng-repeat="column in columns | filter:{enabled: true}">{{ valueFor(gun,column) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,7 @@
+String of Curses,Found on Bad JuJu. Instant reloading and 15% increased damage after a kill.
+Suros Regime,Found on the Suros Regime. Bottom half of the magazine does additional damage starting at a 1% increase to 75% for the final round. The increase follows an exponential curve, so damage will be overstated for all but the final rounds.
+Glass Half Full,Bottom half of the magazine does additional damage starting at a 1% increase to 10% for the final round. The increase follows a mostly linear curve.
+Final Round,Found on a variety of weapons. Increased damage (roughly 30%) for the final round in the magazine. Treated as if it were spread across the clip for DPS purposes.
+Focused Fire,Found on Suros Regime and some other weapons. Decreases rate of fire by 30%, increases damage by 33%.
+Outlaw,Cuts reload time in half after precision kill.
+Luck in the Chamber,One random round does an additional 30% damage.
